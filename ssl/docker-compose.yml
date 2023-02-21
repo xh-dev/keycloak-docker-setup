@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  cert-gen:
+    build:
+      args:
+        progress: plain
+      context: .
+    volumes:
+      - "./certs:/app/certs"

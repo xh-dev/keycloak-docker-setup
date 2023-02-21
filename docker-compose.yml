@@ -1,0 +1,55 @@
+# https://www.keycloak.org/getting-started/getting-started-docker
+
+version: "3.9"
+networks:
+  keycloak-db-net:
+    driver: bridge
+  keycloak-back-net:
+    driver: bridge
+services:
+  mysql:
+    image: mysql:8
+    networks:
+      - keycloak-db-net
+    environment:
+      - MYSQL_ROOT_PASSWORD=${ROOT_PASSWORD}
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_DATABASE=${DATABASE}
+      - MYSQL_USER=${USER}
+      - MYSQL_PASSWORD=${PASSWORD}
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+    restart: always
+    ports:
+      - "${EXPOSING_DATABASE}:3306"
+  keycloak:
+    image: quay.io/keycloak/keycloak:20.0.3
+    networks:
+      - keycloak-db-net
+      - keycloak-back-net
+    depends_on:
+      - mysql
+    environment:
+      - KEYCLOAK_ADMIN=${KEYCLOAK_USER}
+      - KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_PASSWORD}
+      - DB_VENDOR=MYSQL
+      - DB_ADDR=mysql
+      - DB_DATABASE=${DATABASE}
+      - DB_USER=${USER}
+      - DB_PASSWORD=${PASSWORD}
+    ports:
+    - "${EXPOSING_KEYCLOAK}:8080"
+    command: ["start","--optimized", "--proxy", "edge", "--hostname-strict","false"]
+  nginx:
+    image: nginx:1.23-alpine
+    depends_on:
+      - keycloak
+    networks:
+      - keycloak-back-net
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "./nginx/conf:/etc/nginx/conf.d"
+      - "./nginx/ssl:/ssl"

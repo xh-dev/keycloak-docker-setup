@@ -1,0 +1,18 @@
+server { 
+  listen       80;
+  server_name  {sub_domain}.{base_domain};
+
+  return 301 https://{sub_domain}.{base_domain};
+
+}
+server {
+  listen 443 ssl;
+  server_name  {sub_domain}.{base_domain};
+
+  ssl_certificate /ssl/bundle.pem;
+  ssl_certificate_key /ssl/server-{sub_domain}-key.pem;
+
+  location / {
+      proxy_pass   http://{sub_domain}.{base_domain}:8080;
+  }
+}
