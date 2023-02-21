@@ -12,11 +12,12 @@ services:
     networks:
       - keycloak-db-net
     environment:
-      - MYSQL_ROOT_PASSWORD=${ROOT_PASSWORD}
+      - MYSQL_ROOT_PASSWORD={ROOT_PASSWORD}
       - MYSQL_ROOT_HOST=%
-      - MYSQL_DATABASE=${DATABASE}
-      - MYSQL_USER=${USER}
-      - MYSQL_PASSWORD=${PASSWORD}
+      - MYSQL_DATABASE={DATABASE}
+      - MYSQL_USER={USER}
+      - MYSQL_PASSWORD={PASSWORD}
+      - TZ=Hongkong
     volumes:
       - ./mysql/data:/var/lib/mysql
     restart: always
@@ -30,13 +31,14 @@ services:
     depends_on:
       - mysql
     environment:
-      - KEYCLOAK_ADMIN=${KEYCLOAK_USER}
-      - KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_PASSWORD}
+      - KEYCLOAK_ADMIN={KEYCLOAK_USER}
+      - KEYCLOAK_ADMIN_PASSWORD={KEYCLOAK_PASSWORD}
       - DB_VENDOR=MYSQL
       - DB_ADDR=mysql
-      - DB_DATABASE=${DATABASE}
-      - DB_USER=${USER}
-      - DB_PASSWORD=${PASSWORD}
+      - DB_DATABASE={DATABASE}
+      - DB_USER={USER}
+      - DB_PASSWORD={PASSWORD}
+      - TZ=Hongkong
     ports:
     - "${EXPOSING_KEYCLOAK}:8080"
     command: ["start","--optimized", "--proxy", "edge", "--hostname-strict","false"]
@@ -50,6 +52,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    environment:
+      - TZ=Hongkong
     volumes:
       - "./nginx/conf:/etc/nginx/conf.d"
       - "./nginx/ssl:/ssl"
