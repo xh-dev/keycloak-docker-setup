@@ -26,8 +26,7 @@
     BASE_DOMAIN="example.com" # replace with your base domain 
     cat keycloak.conf_tpl | \
         sed "s|{sub_domain}|${SUB_DOMAIN}|" | \
-        sed "s|{base_domain}|${BASE_DOMAIN}|" | 
-        > keycloak.conf
+        sed "s|{base_domain}|${BASE_DOMAIN}|" > keycloak.conf
     ```
 
 3. add `.env` file for the docker compose 
