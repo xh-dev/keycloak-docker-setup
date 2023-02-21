@@ -12,11 +12,11 @@ services:
     networks:
       - keycloak-db-net
     environment:
-      - MYSQL_ROOT_PASSWORD={ROOT_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${ROOT_PASSWORD}
       - MYSQL_ROOT_HOST=%
-      - MYSQL_DATABASE={MYSQL_DATABASE}
-      - MYSQL_USER={MYSQL_USER}
-      - MYSQL_PASSWORD={MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - TZ=Hongkong
       - MYSQL_INITDB_SKIP_TZINFO=true
     volumes:
@@ -32,13 +32,13 @@ services:
     depends_on:
       - mysql
     environment:
-      - KEYCLOAK_ADMIN={KEYCLOAK_USER}
-      - KEYCLOAK_ADMIN_PASSWORD={KEYCLOAK_PASSWORD}
+      - KEYCLOAK_ADMIN=${KEYCLOAK_USER}
+      - KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_PASSWORD}
       - DB_VENDOR=MYSQL
       - DB_ADDR=mysql
-      - DB_DATABASE={MYSQL_DATABASE}
-      - DB_USER={MYSQL_USER}
-      - DB_PASSWORD={MYSQL_PASSWORD}
+      - DB_DATABASE=${MYSQL_DATABASE}
+      - DB_USER=${MYSQL_USER}
+      - DB_PASSWORD=${MYSQL_PASSWORD}
       - TZ=Hongkong
     ports:
     - "${EXPOSING_KEYCLOAK}:8080"
