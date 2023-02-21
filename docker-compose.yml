@@ -18,6 +18,7 @@ services:
       - MYSQL_USER={USER}
       - MYSQL_PASSWORD={PASSWORD}
       - TZ=Hongkong
+      - MYSQL_INITDB_SKIP_TZINFO=true
     volumes:
       - ./mysql/data:/var/lib/mysql
     restart: always
