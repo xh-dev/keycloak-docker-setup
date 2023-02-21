@@ -14,9 +14,9 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD={ROOT_PASSWORD}
       - MYSQL_ROOT_HOST=%
-      - MYSQL_DATABASE={DATABASE}
-      - MYSQL_USER={USER}
-      - MYSQL_PASSWORD={PASSWORD}
+      - MYSQL_DATABASE={MYSQL_DATABASE}
+      - MYSQL_USER={MYSQL_USER}
+      - MYSQL_PASSWORD={MYSQL_PASSWORD}
       - TZ=Hongkong
       - MYSQL_INITDB_SKIP_TZINFO=true
     volumes:
@@ -36,9 +36,9 @@ services:
       - KEYCLOAK_ADMIN_PASSWORD={KEYCLOAK_PASSWORD}
       - DB_VENDOR=MYSQL
       - DB_ADDR=mysql
-      - DB_DATABASE={DATABASE}
-      - DB_USER={USER}
-      - DB_PASSWORD={PASSWORD}
+      - DB_DATABASE={MYSQL_DATABASE}
+      - DB_USER={MYSQL_USER}
+      - DB_PASSWORD={MYSQL_PASSWORD}
       - TZ=Hongkong
     ports:
     - "${EXPOSING_KEYCLOAK}:8080"
