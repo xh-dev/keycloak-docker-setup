@@ -29,7 +29,7 @@
         sed "s|{base_domain}|${BASE_DOMAIN}|" > keycloak.conf
     ```
 
-3. add `.env` file for the docker compose 
+3. modify `.env` file for the docker compose 
     ```text
     ROOT_PASSWORD={root password of mysql}
     DATABASE={database of keycloak}
