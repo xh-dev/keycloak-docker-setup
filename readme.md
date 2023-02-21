@@ -26,7 +26,7 @@ SUB_DOMAIN="kk" # replace wiht your sub domain
 BASE_DOMAIN="example.com" # replace with your base domain 
 cat keycloak.conf_tpl | \
     sed "s|{sub_domain}|${SUB_DOMAIN}|" | \
-    sed "s|{base_domain}|${BASE_DOMAIN}|" | \
+    sed "s|{base_domain}|${BASE_DOMAIN}|" | 
     > keycloak.conf
 ```
 Run command:
