@@ -13,6 +13,6 @@ server {
   ssl_certificate_key /ssl/server-{sub_domain}-key.pem;
 
   location / {
-      proxy_pass   http://{sub_domain}.{base_domain}:8080;
+      proxy_pass   http://keycloak:8080;
   }
 }
