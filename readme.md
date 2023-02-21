@@ -33,9 +33,9 @@
     ```text
     ROOT_PASSWORD={root password of mysql}
     DATABASE={database of keycloak}
-    USER={database username}
-    PASSWORD={database password}
-    EXPOSING_DATABASE=3306
+    MYSQL_USER={database username}
+    MYSQL_PASSWORD={database password}
+    MYSQL_EXPOSING_DATABASE=3306
 
     KEYCLOAK_USER={keycloak admin user}
     KEYCLOAK_PASSWORD={keycloak admin password}
