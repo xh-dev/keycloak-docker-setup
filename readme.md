@@ -17,8 +17,18 @@
 3. Copy the `./ssl/certs/{server_KC}/bundle.pem` (`./ssl/certs/kc/bundle.pem` in the example) and `./ssl/certs/{SErVER_KC}/server-{SERVER-KC-key.pem}` (`./ssl/certs/kc/server-kc-key.pem` in the example) to `./nginx/ssl/`
 
 ## Startup the keycloak
-In case you need to modify the mysql and keycloak password, please modify the file `./.env`.
 
+1. In case you need to modify the mysql and keycloak password, please modify the file `./.env`.
+
+2. update the nginx route config
+```sh
+SUB_DOMAIN="kk" # replace wiht your sub domain
+BASE_DOMAIN="example.com" # replace with your base domain 
+cat keycloak.conf_tpl | \
+    sed "s|{sub_domain}|${SUB_DOMAIN}|" | \
+    sed "s|{base_domain}|${BASE_DOMAIN}|" | \
+    > keycloak.conf
+```
 Run command:
 ```shell
 docker compose up # start the services
