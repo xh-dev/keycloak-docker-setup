@@ -21,15 +21,29 @@
 1. In case you need to modify the mysql and keycloak password, please modify the file `./.env`.
 
 2. update the nginx route config
-```sh
-SUB_DOMAIN="kk" # replace wiht your sub domain
-BASE_DOMAIN="example.com" # replace with your base domain 
-cat keycloak.conf_tpl | \
-    sed "s|{sub_domain}|${SUB_DOMAIN}|" | \
-    sed "s|{base_domain}|${BASE_DOMAIN}|" | 
-    > keycloak.conf
-```
-Run command:
+    ```sh
+    SUB_DOMAIN="kk" # replace wiht your sub domain
+    BASE_DOMAIN="example.com" # replace with your base domain 
+    cat keycloak.conf_tpl | \
+        sed "s|{sub_domain}|${SUB_DOMAIN}|" | \
+        sed "s|{base_domain}|${BASE_DOMAIN}|" | 
+        > keycloak.conf
+    ```
+
+3. add `.env` file for the docker compose 
+    ```text
+    ROOT_PASSWORD={root password of mysql}
+    DATABASE={database of keycloak}
+    USER={database username}
+    PASSWORD={database password}
+    EXPOSING_DATABASE=3306
+
+    KEYCLOAK_USER={keycloak admin user}
+    KEYCLOAK_PASSWORD={keycloak admin password}
+    EXPOSING_KEYCLOAK=8080
+    ```
+
+4. Run command:
 ```shell
 docker compose up # start the services
 ```
